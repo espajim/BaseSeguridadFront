@@ -1,0 +1,77 @@
+<app-menu-empleado></app-menu-empleado>
+<div class="roles-container">
+  <div class="header-actions">
+    <h2>Categorías</h2>
+    <button mat-raised-button color="primary" (click)="openDialog()">
+      <mat-icon>add</mat-icon>
+      Nueva Categoría
+    </button>
+  </div> 
+
+  <mat-form-field class="search-field">
+    <mat-label>Buscar</mat-label>
+    <input matInput (keyup)="aplicarFiltro($event)" placeholder="Buscar por nombre o descripción">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    
+    <ng-container matColumnDef="IdTipoCategoria">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let categoria">{{categoria.IdTipoCategoria}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Nombre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+      <td mat-cell *matCellDef="let categoria">{{categoria.Nombre}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Descripcion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripción</th>
+      <td mat-cell *matCellDef="let categoria">{{categoria.Descripcion}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="FechaCreacion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha Creación</th>
+      <td mat-cell *matCellDef="let categoria">{{categoria.FechaCreacion | date:'short'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="FechaModificacion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha Modificación</th>
+      <td mat-cell *matCellDef="let categoria">{{categoria.FechaModificacion | date:'short'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Estatus">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Estatus</th>
+      <td mat-cell *matCellDef="let categoria">
+        <span [class.estado-activo]="categoria.Estatus === 'Activo'" [class.estado-inactivo]="categoria.Estatus === 'Inactivo'">
+          {{categoria.Estatus}}
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let categoria">
+        <div style="display: flex; gap: 4px; justify-content: center; align-items: center;">
+          <button mat-icon-button color="primary" (click)="editarCategoria(categoria)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="eliminarCategoria(categoria.IdTipoCategoria)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator 
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 50]"
+    showFirstLastButtons
+    aria-label="Seleccione la página">
+  </mat-paginator>
+</div>

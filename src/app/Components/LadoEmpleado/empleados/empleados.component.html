@@ -1,0 +1,82 @@
+<app-menu-empleado></app-menu-empleado>
+<div class="roles-container">
+  <div class="header-actions">
+    <h2>Empleados</h2>
+    <button mat-raised-button color="primary" (click)="openDialog()">
+      <mat-icon>add</mat-icon>
+      Nuevo Empleado
+    </button>
+  </div> 
+
+  <mat-form-field class="search-field">
+    <mat-label>Buscar</mat-label>
+    <input matInput (keyup)="aplicarFiltro($event)" placeholder="Buscar por nombre, correo o rol">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    
+    <ng-container matColumnDef="idUsuario">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let empleado">{{empleado.idUsuario}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="nombreCompleto">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+      <td mat-cell *matCellDef="let empleado">{{empleado.nombreCompleto}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="correo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
+      <td mat-cell *matCellDef="let empleado">{{empleado.correo}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="rol">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Rol</th>
+      <td mat-cell *matCellDef="let empleado">{{empleado.rol}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="fechaCreacion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha Creación</th>
+      <td mat-cell *matCellDef="let empleado">{{empleado.fechaCreacion | date:'short'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="fechaModificacion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha Modificación</th>
+      <td mat-cell *matCellDef="let empleado">{{empleado.fechaModificacion | date:'short'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="deleted">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Estatus</th>
+      <td mat-cell *matCellDef="let empleado">
+        <span [class.estado-activo]="empleado.deleted === 0" [class.estado-inactivo]="empleado.deleted === 1">
+          {{empleado.deleted === 0 ? 'Activo' : 'Inactivo'}}
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let empleado">
+        <div style="display: flex; gap: 4px; justify-content: center; align-items: center;">
+          <button mat-icon-button color="primary" (click)="editarEmpleado(empleado)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="eliminarEmpleado(empleado.idUsuario)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator 
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 50]"
+    showFirstLastButtons
+    aria-label="Seleccione la página">
+  </mat-paginator>
+</div>

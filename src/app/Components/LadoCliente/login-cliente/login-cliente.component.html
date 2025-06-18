@@ -1,0 +1,42 @@
+<div class="login-container">
+  <div class="login-box">
+    <img src="Images/Logo.jpg" alt="EMCEDIC Logo" class="logo">
+    <h2>Bienvenido a EMCEDIC</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="input-group">
+        <label for="Correo">Correo Electrónico</label>
+        <input type="email" id="Correo" formControlName="Correo" placeholder="Ingresa tu correo" required>
+        <div class="error-message" *ngIf="loginForm.get('Correo')?.errors?.['required'] && loginForm.get('Correo')?.touched">
+          El correo es requerido
+        </div>
+        <div class="error-message" *ngIf="loginForm.get('Correo')?.errors?.['email'] && loginForm.get('Correo')?.touched">
+          Ingresa un correo válido
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="Password">Contraseña</label>
+        <div class="password-container">
+          <input [type]="mostrarPassword ? 'text' : 'password'" id="Password" formControlName="Password" placeholder="Ingresa tu contraseña" required>
+          <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+            <i class="fas" [class.fa-eye]="!mostrarPassword" [class.fa-eye-slash]="mostrarPassword"></i>
+          </button>
+        </div>
+        <div class="error-message" *ngIf="loginForm.get('Password')?.errors?.['required'] && loginForm.get('Password')?.touched">
+          La contraseña es requerida
+        </div>
+        <div class="error-message" *ngIf="loginForm.get('Password')?.errors?.['minlength'] && loginForm.get('Password')?.touched">
+          La contraseña debe tener al menos 6 caracteres
+        </div>
+      </div>
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+      <button type="submit" class="btn-primary" [disabled]="!loginForm.valid">Iniciar Sesión</button>
+      <button type="button" class="btn-google" (click)="loginWithGoogle()">
+        <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google Logo">
+        Iniciar sesión con Google
+      </button>
+      <p class="register-link">¿No tienes cuenta? <a href="#">Regístrate</a></p>
+    </form>
+  </div>
+</div>

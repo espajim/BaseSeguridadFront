@@ -1,0 +1,55 @@
+<div class="menu-container" [class.menu-closed]="!isMenuOpen">
+  <div class="menu-header">
+    <button mat-icon-button (click)="toggleMenu()" class="menu-toggle">
+      <mat-icon>{{isMenuOpen ? 'menu_open' : 'menu'}}</mat-icon>
+    </button>
+    <div class="user-info" *ngIf="isMenuOpen">
+      <span class="user-name">{{userData?.nombreCompleto}}</span>
+      <small class="user-role">Empleado</small>
+    </div>
+  </div>
+
+  <mat-nav-list>
+    <ng-container *ngFor="let item of menuItems">
+      <!-- Caso 1: Menú principal con submenus -->
+      <mat-expansion-panel *ngIf="hasSubmenus(item)" 
+                          [expanded]="false"
+                          class="mat-elevation-z0 menu-panel">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon matListItemIcon>{{item.icono || 'folder'}}</mat-icon>
+            <span *ngIf="isMenuOpen" class="menu-item-text">{{item.nombre}}</span>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-nav-list class="submenu-list">
+          <a mat-list-item *ngFor="let subItem of getSubmenus(item.idModulo)"
+             [routerLink]="subItem.url"
+             routerLinkActive="active-link"
+             class="submenu-item">
+            <mat-icon matListItemIcon>{{subItem.icono || 'subdirectory_arrow_right'}}</mat-icon>
+            <span matListItemTitle>{{subItem.nombre}}</span>
+          </a>
+        </mat-nav-list>
+      </mat-expansion-panel>
+
+      <!-- Caso 2 y 3: Menu principal sin submenis o con URL directa -->
+      <a mat-list-item *ngIf="isMenuPrincipal(item)" 
+         [routerLink]="item.url" 
+         routerLinkActive="active-link"
+         class="menu-item">
+        <mat-icon matListItemIcon>{{item.icono || 'folder'}}</mat-icon>
+        <span matListItemTitle *ngIf="isMenuOpen" class="menu-item-text">{{item.nombre}}</span>
+      </a>
+    </ng-container>
+
+    <mat-divider></mat-divider>
+    <a mat-list-item (click)="cerrarSesion()" class="logout-button">
+      <mat-icon matListItemIcon>logout</mat-icon>
+      <span matListItemTitle *ngIf="isMenuOpen">Cerrar Sesión</span>
+    </a>
+  </mat-nav-list>
+</div>
+<div class="central-logo-container">
+  <img src="Images/Logo.jpg" alt="Logo" class="central-logo" />
+</div>

@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>{{titulo}}</h2>
+
+<form [formGroup]="form" (ngSubmit)="guardar()">
+  <mat-dialog-content>
+    <div class="form-container">
+      <ng-container *ngFor="let campo of campos">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{campo.label}}</mat-label>
+          <ng-container [ngSwitch]="campo.tipo">
+            <input *ngSwitchCase="'text'" matInput [formControlName]="campo.nombre" [type]="campo.tipo">
+            <input *ngSwitchCase="'email'" matInput [formControlName]="campo.nombre" [type]="campo.tipo">
+            <input *ngSwitchCase="'number'" matInput [formControlName]="campo.nombre" [type]="campo.tipo">
+            <mat-select *ngSwitchCase="'select'" [formControlName]="campo.nombre">
+              <mat-option *ngFor="let opcion of campo.opciones" [value]="opcion.value">
+                {{opcion.label}}
+              </mat-option>
+            </mat-select>
+          </ng-container>
+          <mat-error *ngIf="form.get(campo.nombre)?.hasError('required')">
+            Este campo es requerido
+          </mat-error>
+        </mat-form-field>
+      </ng-container>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">
+      Guardar
+    </button>
+  </mat-dialog-actions>
+</form>

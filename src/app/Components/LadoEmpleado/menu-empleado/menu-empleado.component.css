@@ -1,0 +1,220 @@
+.menu-container {
+  width: 270px;
+  height: 100vh;
+  background: linear-gradient(160deg, #014F86 0%, #89C2D9 100%);
+  box-shadow: 2px 0 16px rgba(60, 60, 120, 0.10);
+  border-radius: 0 18px 18px 0;
+  transition: all 0.3s cubic-bezier(.4,2,.3,1);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  color: #222;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-closed {
+  width: 70px;
+}
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  padding: 28px 18px 18px 18px;
+  background: transparent;
+  border-radius: 0 18px 0 0;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 18px;
+}
+
+.user-name {
+  font-weight: 900;
+  font-size: 1.25em;
+  color: #fff;
+  margin-bottom: 2px;
+  text-shadow: 0 2px 8px #014F86;
+}
+
+.user-role {
+  color: #89C2D9;
+  font-size: 0.85em;
+  margin-top: 0;
+}
+
+.menu-toggle {
+  color: #014F86 !important;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px 0 rgba(1,79,134,0.08);
+  transition: background 0.2s;
+}
+
+.menu-toggle:hover {
+  background: #e0e7ef;
+}
+
+mat-nav-list {
+  padding-top: 18px;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-panel {
+  margin: 8px 0 0 0 !important;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff !important;
+  box-shadow: 0 2px 8px 0 rgba(1,79,134,0.07);
+}
+
+mat-expansion-panel-header {
+  padding: 0 18px !important;
+  color: #014F86 !important;
+  min-height: 48px !important;
+}
+
+mat-icon {
+  margin-right: 16px;
+  color: #014F86;
+  font-size: 24px !important;
+}
+
+.menu-closed mat-icon {
+  margin-right: 0;
+}
+
+.menu-item-text {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-size: 1.08em;
+  color: #014F86;
+}
+
+.menu-item {
+  margin: 8px 0 !important;
+  border-radius: 12px;
+  padding-left: 8px !important;
+  color: #014F86 !important;
+  font-size: 1.05em;
+  background: #fff;
+  box-shadow: 0 2px 8px 0 rgba(1,79,134,0.04);
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.menu-item:hover {
+  background: #e0e7ef;
+  color: #228be6 !important;
+  transform: translateX(6px);
+}
+
+.active-link {
+  background: #e0e7ef !important;
+  border-left: 4px solid #228be6;
+  color: #228be6 !important;
+}
+
+.submenu-list {
+  background: #f6fafd !important;
+  border-radius: 0 0 14px 14px;
+  margin-bottom: 2px;
+}
+
+.submenu-item {
+  padding-left: 38px !important;
+  color: #014F86 !important;
+  font-size: 0.98em;
+  border-radius: 8px;
+  margin: 2px 0;
+  background: transparent;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.submenu-item mat-icon {
+  font-size: 18px !important;
+  width: 18px;
+  height: 18px;
+  color: #228be6;
+}
+
+.submenu-item:hover {
+  background: #e0e7ef;
+  color: #228be6 !important;
+  transform: translateX(8px);
+}
+
+mat-divider {
+  margin: 18px 0 10px 0;
+  border-color: #b6d0e2;
+}
+
+.logout-button {
+  margin-top: auto;
+  color: #fff !important;
+  border-radius: 14px;
+  background: linear-gradient(90deg, #014F86 60%, #228be6 100%);
+  font-weight: 900;
+  font-size: 1.08em;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px 0 rgba(1,79,134,0.13);
+  text-shadow: 0 2px 8px #014F86;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+  padding-left: 12px !important;
+  margin-bottom: 18px;
+}
+
+.logout-button:hover {
+  background: linear-gradient(90deg, #228be6 60%, #014F86 100%);
+  color: #fff !important;
+  transform: scale(1.04);
+}
+
+.logout-button span,
+.logout-button mat-icon {
+  color: #fff !important;
+}
+
+::ng-deep .mat-expansion-panel-body {
+  padding: 0 !important;
+}
+
+::ng-deep .mat-expansion-indicator {
+  color: #228be6 !important;
+}
+
+::ng-deep .mat-expansion-indicator::after {
+  border-color: #228be6 !important;
+}
+
+::ng-deep .mat-expansion-panel-header-title {
+  color: #014F86 !important;
+}
+
+::ng-deep .mat-expanded {
+  background-color: #f6fafd !important;
+}
+
+.central-logo-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  display: none;
+}
+
+.central-logo {
+  width: 300px;
+  height: auto;
+  opacity: 0.8;
+}
+
+/* Mostrar el logo solo cuando no hay contenido */
+:host:not(:has(+ *)) .central-logo-container {
+  display: block;
+}

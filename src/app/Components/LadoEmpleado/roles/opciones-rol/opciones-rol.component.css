@@ -1,0 +1,28 @@
+.modulos-container {
+  padding: 20px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.modulo-item {
+  margin-bottom: 15px;
+}
+
+.submodulos {
+  margin-left: 30px;
+  margin-top: 10px;
+}
+
+.submodulo-item {
+  margin-bottom: 8px;
+}
+
+mat-icon {
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+mat-checkbox {
+  display: flex;
+  align-items: center;
+}
